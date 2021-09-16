@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,12 +23,12 @@ export default class Details extends Component {
       },
     } = this.props;
 
-    axios
-      .request(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+      .then((response) => response.json())
       .then((response) => {
         console.log(response);
         this.setState({
-          cocktail: response.data.drinks[0],
+          cocktail: response.drinks[0],
         });
       })
       .catch((error) => console.error(error));
