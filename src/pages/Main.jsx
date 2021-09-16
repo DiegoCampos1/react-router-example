@@ -8,7 +8,7 @@ export default class Main extends Component {
     this.state = {
       cocktails: null,
       query: '',
-      loading: true,
+      loading: false,
     };
     this.handleInputQuery = this.handleInputQuery.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -22,19 +22,19 @@ export default class Main extends Component {
 
   fetchData() {
     const { query } = this.state;
-    axios
+    this.setState({ loading: true }, () => (axios
       .request(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
       )
       .then((response) => this.setState(
         { cocktails: response.data.drinks, loading: false },
       ))
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))));
   }
 
   render() {
     const { query, cocktails, loading } = this.state;
-    console.log(cocktails);
+    if (loading) return <div>Loading...</div>;
     return (
       <div>
         <label htmlFor="inputQuery">
@@ -50,7 +50,7 @@ export default class Main extends Component {
         <button type="button" onClick={ this.fetchData }>
           Pesquisar
         </button>
-        {!loading ? (
+        {cocktails ? (
           cocktails.map((cocktail) => (
             <div key={ cocktail.idDrink }>
               <Link to={ `/details/${cocktail.idDrink}` }>
