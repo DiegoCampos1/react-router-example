@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -22,14 +21,17 @@ export default class Main extends Component {
 
   fetchData() {
     const { query } = this.state;
-    this.setState({ loading: true }, () => (axios
-      .request(
+    this.setState({ loading: true }, () => (
+      fetch(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
       )
-      .then((response) => this.setState(
-        { cocktails: response.data.drinks, loading: false },
-      ))
-      .catch((error) => console.error(error))));
+        .then((response) => response.json())
+        .then((result) => {
+          this.setState(
+            { cocktails: result.drinks, loading: false },
+          );
+        })
+        .catch((error) => console.error(error))));
   }
 
   render() {
