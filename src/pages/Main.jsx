@@ -8,6 +8,7 @@ export default class Main extends Component {
       cocktails: null,
       query: '',
       loading: false,
+      notFound: false,
     };
     this.handleInputQuery = this.handleInputQuery.bind(this);
     this.fetchData = this.fetchData.bind(this);
@@ -21,22 +22,28 @@ export default class Main extends Component {
 
   fetchData() {
     const { query } = this.state;
-    this.setState({ loading: true }, () => (
+    this.setState({ loading: true,
+      cocktails: null }, () => (
       fetch(
         `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
       )
         .then((response) => response.json())
         .then((result) => {
+          if (!result.drinks) {
+            return this.setState({
+              notFound: true,
+              loading: false,
+            });
+          }
           this.setState(
-            { cocktails: result.drinks, loading: false },
+            { cocktails: result.drinks, loading: false, notFound: false },
           );
         })
         .catch((error) => console.error(error))));
   }
 
   render() {
-    const { query, cocktails, loading } = this.state;
-    if (loading) return <div>Loading...</div>;
+    const { query, cocktails, loading, notFound } = this.state;
     return (
       <div>
         <label htmlFor="inputQuery">
@@ -52,8 +59,9 @@ export default class Main extends Component {
         <button type="button" onClick={ this.fetchData }>
           Pesquisar
         </button>
-        {cocktails ? (
-          cocktails.map((cocktail) => (
+        {loading && <div>Loading...</div>}
+        {cocktails
+          && cocktails.map((cocktail) => (
             <div key={ cocktail.idDrink }>
               <Link to={ `/details/${cocktail.idDrink}` }>
                 <nav>{cocktail.strDrink}</nav>
@@ -64,10 +72,8 @@ export default class Main extends Component {
                 width="100px"
               />
             </div>
-          ))
-        ) : (
-          <div>Not found</div>
-        )}
+          ))}
+        {notFound && <div>Not Found</div>}
       </div>
     );
   }
