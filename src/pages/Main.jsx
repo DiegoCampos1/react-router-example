@@ -73,7 +73,7 @@ export default class Main extends Component {
               />
             </div>
           ))}
-        {notFound && <div>Not Found</div>}
+        {!loading && notFound && <div>Not Found</div>}
       </div>
     );
   }
