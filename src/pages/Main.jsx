@@ -33,6 +33,7 @@ export default class Main extends Component {
             return this.setState({
               notFound: true,
               loading: false,
+              cocktails: null,
             });
           }
           this.setState(
