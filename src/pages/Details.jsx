@@ -39,7 +39,7 @@ export default class Details extends Component {
     if (!cocktail) return <div>Loading...</div>;
     const { strDrink, strDrinkThumb, strInstructions } = cocktail;
     return (
-      <div>
+      <div className="cocktail-detail">
         <h3>{strDrink}</h3>
         <img src={ strDrinkThumb } alt="Drink" />
         <p>{strInstructions}</p>

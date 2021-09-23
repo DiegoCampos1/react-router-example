@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  place-content: center;
+  padding-top: 2em;
 }
 
-.App-link {
-  color: #61dafb;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cocktails {
+  font-weight: 700;
+  border: 1px solid blueviolet;
+  margin-top: 5%;
+  flex-direction: column;
+  align-items: center;
+  place-content: center;
+}
+
+.cocktail-detail h3{
+  color: blueviolet;
+  font-size: 2em;
+}
+
+a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2em;
+  font-weight: 700;
+  text-decoration: none;
+  color: blueviolet;
+}
+
+a:hover {
+  color:darkmagenta;
+}
+
+input {
+  font-size: 1rem;
+  border-style: solid;
+  border-radius: 6px;
+  border-color: darkmagenta;
+  outline: transparent;
+  width: 100%;
+  margin-top: 2%;
+}
+
+button {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: darkmagenta;
+  border-radius: 6px;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  text-align: center;
+  text-transform: none;
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+button:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
 }

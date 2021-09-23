@@ -44,35 +44,39 @@ export default class Main extends Component {
 
   render() {
     const { query, cocktails, loading, notFound } = this.state;
+
     return (
-      <div>
-        <label htmlFor="inputQuery">
-          Digite termo de pesquisa:
-          <input
-            id="inputQuery"
-            type="text"
-            onChange={ this.handleInputQuery }
-            name="query"
-            value={ query }
-          />
-        </label>
-        <button type="button" onClick={ this.fetchData }>
-          Pesquisar
-        </button>
+      <div className="main">
+        <form>
+          <label htmlFor="inputQuery">
+            Digite termo de pesquisa:
+            <input
+              id="inputQuery"
+              type="text"
+              onChange={ this.handleInputQuery }
+              name="query"
+              value={ query }
+            />
+          </label>
+          <button type="button" onClick={ this.fetchData }>
+            Pesquisar
+          </button>
+        </form>
         {loading && <div>Loading...</div>}
-        {cocktails
+        <div>
+          {cocktails
           && cocktails.map((cocktail) => (
-            <div key={ cocktail.idDrink }>
+            <div className="cocktails" key={ cocktail.idDrink }>
               <Link to={ `/details/${cocktail.idDrink}` }>
                 <nav>{cocktail.strDrink}</nav>
               </Link>
               <img
                 src={ cocktail.strDrinkThumb }
                 alt={ cocktail.strDrink }
-                width="100px"
               />
             </div>
           ))}
+        </div>
         {!loading && notFound && <div>Not Found</div>}
       </div>
     );
